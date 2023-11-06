@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     margin: 0;
@@ -89,6 +89,7 @@ a {
         align-items: center;
         padding: 13px 30px;
         border: none;
+        font-family: Arial;
         border-radius: 14px;
         box-shadow: 0px 6px 12px 0px rgba(113, 63, 255, 0.25);
         background-color: $blue-color;
@@ -162,7 +163,6 @@ a {
     }
 
     &-priority-desc {
-        color: $red-color;
         font-size: 14px;
         font-weight: 500;
         line-height: 14px;
@@ -211,7 +211,20 @@ a {
 
 }
 
-.modal-add {
+p.task-priority-desc.task-priority-high {
+    color: $red-color;
+}
+
+p.task-priority-desc.task-priority-medium {
+    color: $yellow-color;
+}
+
+p.task-priority-desc.task-priority-low {
+    color: $green-color;
+}
+
+.modal-add,
+.modal-update {
     width: 560px;
     height: 401px;
     border-radius: 24px;
@@ -330,7 +343,26 @@ a {
         color: $green-color;
     }
 
-    &-btn-add {
+    &-high-active {
+        border: 1px solid $red-color;
+        background-color: $red-color;
+        color: $white-color;
+    }
+
+    &-medium-active {
+        border: 1px solid $yellow-color;
+        background-color: $yellow-color;
+        color: $white-color;
+    }
+
+    &-low-active {
+        border: 1px solid $green-color;
+        background-color: $green-color;
+        color: $white-color;
+    }
+
+    &-btn-add,
+    &-btn-edit {
         @include action-button;
         display: flex;
         align-items: center;
