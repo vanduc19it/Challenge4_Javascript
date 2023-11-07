@@ -18,7 +18,7 @@ const mediumPriorityBtn = document.querySelector(".modal-btn-medium");
 const lowPriorityBtn = document.querySelector(".modal-btn-low");
 const modalHeading = modalAdd.querySelector(".modal-heading");
 const arrayTaskList = localStorage.getItem("arrayTaskList");
-const listTask = arrayTaskList ? JSON.parse(arrayTaskList) : [];
+let listTask = arrayTaskList ? JSON.parse(arrayTaskList) : [];
 
 const showTaskList = () => {
     listTask.forEach(task => {
@@ -110,10 +110,6 @@ buttonEdit.addEventListener("click", function () {
     modalUpdate.style.display = "none";
     overlay.style.display = "none";
 })
-iconDelete.addEventListener("click", function () {
-    modalDelete.style.display = "flex";
-    overlay.style.display = "block";
-})
 
 let taskId = +localStorage.getItem("taskId") || 1;
 
@@ -129,7 +125,6 @@ buttonAdd.addEventListener("click", function () {
         listTask.push(newTask);
 
         taskId++;
-
 
         localStorage.setItem("arrayTaskList", JSON.stringify(listTask));
         localStorage.setItem("taskId", taskId);
@@ -178,16 +173,6 @@ buttonClose.addEventListener("click", function () {
     overlay.style.display = "none";
 })
 
-buttonDelete.addEventListener("click", function () {
-    modalDelete.style.display = "none";
-    overlay.style.display = "none";
-})
-
-buttonCancel.addEventListener("click", function () {
-    modalDelete.style.display = "none";
-    overlay.style.display = "none";
-})
-
 //disable button add khi input trống
 addInput.addEventListener("input", function() {
     let inputValue = addInput.value;
@@ -211,28 +196,29 @@ taskList.addEventListener("click", function (event) {
     const target = event.target;
 
     if (target.classList.contains("task-edit-icon")) {
-        const li = target.closest("li");
-        const taskId = li.getAttribute("id");
+        const liEdit = target.closest("li");
+        const taskId = liEdit.getAttribute("id");
 
         modalAdd.style.display = "block";
         overlay.style.display = "block";
 
-        const taskItemEdit = listTask[taskId.split('-')[1] - 1];
+        modalHeading.innerText = "Edit Task";
+        buttonAdd.innerText = "Edit";
+        addInput.placeholder = "Task name";
+
+        const taskItemEdit = listTask.find(task => task.taskId === parseInt(taskId.split('-')[1]));
+
         const taskName = taskItemEdit.taskName;
         const priority = taskItemEdit.priority;
         addInput.value = taskName;
         selectedPriority = priority;
         updateSelected();
-
-        modalHeading.innerText = "Edit Task";
-        buttonAdd.innerText = "Edit";
-        addInput.placeholder = "Task name";
         checkValidateInput();
 
         buttonAdd.onclick = () => {
             if (buttonAdd.innerText == "Edit") {
-                const taskContent = li.querySelector(".task-content-desc");
-                const taskPriority = li.querySelector(".task-priority-desc");
+                const taskContent = liEdit.querySelector(".task-content-desc");
+                const taskPriority = liEdit.querySelector(".task-priority-desc");
                 taskContent.innerText = addInput.value;
                 taskPriority.innerText = selectedPriority;
                 taskPriority.classList.remove(`task-priority-${priority}`);
@@ -256,7 +242,6 @@ taskList.addEventListener("click", function (event) {
 });
 
 //change status button
-
 const statusOptions = ["To Do", "In Progress", "Done"];
 
 taskList.addEventListener("click", function (event) {
@@ -283,7 +268,7 @@ taskList.addEventListener("click", function (event) {
             statusIcon.src = "./assets/images/status-done.svg";
         }
 
-        const taskChangeStatus = listTask[taskId.split('-')[1] - 1];
+        const taskChangeStatus = listTask.find(task => task.taskId === parseInt(taskId.split('-')[1]));
         if (taskChangeStatus.status) {
             taskChangeStatus.status = newStatus;
             localStorage.setItem("arrayTaskList", JSON.stringify(listTask));
@@ -291,5 +276,29 @@ taskList.addEventListener("click", function (event) {
     }
 })
 
+//delete task
+taskList.onclick = (event) => {
+    const target = event.target;
 
+    if(target.classList.contains("task-delete-icon")) {
+        const liDelete = target.closest("li");
+        const taskId = liDelete.getAttribute("id").split('-')[1];
+
+        modalDelete.style.display = "flex";
+        overlay.style.display = "block";
+        buttonDelete.onclick = () => {
+            
+            liDelete.remove();
+            listTask = listTask.filter(task => task.taskId !== parseInt(taskId)); 
+            localStorage.setItem("arrayTaskList", JSON.stringify(listTask));
+            modalDelete.style.display = "none";
+            overlay.style.display = "none";
+        }
+
+        buttonCancel.addEventListener("click", function () {
+            modalDelete.style.display = "none";
+            overlay.style.display = "none";
+        })
+    }
+}
 
