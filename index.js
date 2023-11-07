@@ -37,10 +37,10 @@ const showTaskList = () => {
                 <p class="task-priority-desc task-priority-${task.priority}">${task.priority}</p>
             </div>
             <div class="task-status">
-                <button class="task-status-btn">To Do</button>
+                <button class="task-status-btn">${task.status}</button>
             </div>
             <div class="task-icon-group">
-                <img src="./assets/images/status-todo.svg" alt="status icon" class="task-status-icon">
+                <img src="./assets/images/status-${task.status.replace(' ', '').toLowerCase()}.svg" alt="status icon" class="task-status-icon">
                 <img src="./assets/images/edit-icon.svg" alt="edit icon" class="task-edit-icon">
                 <img src="./assets/images/delete-icon.svg" alt="delete icon" class="task-delete-icon">
             </div>
@@ -116,12 +116,14 @@ iconDelete.addEventListener("click", function () {
 })
 
 let taskId = +localStorage.getItem("taskId") || 1;
+
 buttonAdd.addEventListener("click", function () {
     if (buttonAdd.innerText == "Add") {
         const newTask = {
             taskId: taskId,
             taskName: addInput.value,
             priority: selectedPriority,
+            status: "To Do",
         }
 
         listTask.push(newTask);
@@ -162,7 +164,6 @@ buttonAdd.addEventListener("click", function () {
 
         modalAdd.style.display = "none";
         overlay.style.display = "none";
-
     }
 
 })
@@ -172,6 +173,7 @@ buttonClose.addEventListener("click", function () {
     selectedPriority = "low"
     modalHeading.innerText = "Add Task";
     buttonAdd.innerText = "Add";
+    addInput.placeholder = "Type your task here...";
     modalAdd.style.display = "none";
     overlay.style.display = "none";
 })
@@ -187,11 +189,10 @@ buttonCancel.addEventListener("click", function () {
 })
 
 //disable button add khi input trống
-addInput.onkeyup = () => {
-
+addInput.addEventListener("input", function() {
     let inputValue = addInput.value;
 
-    if (inputValue.trim() != 0) {
+    if (inputValue.trim() !== "") {
         buttonAdd.style.cursor = "pointer";
         buttonAdd.disabled = false;
         buttonAdd.style.border = `1px solid ${blueColor}`;
@@ -202,7 +203,7 @@ addInput.onkeyup = () => {
         buttonAdd.style.cursor = "default";
         buttonAdd.disabled = true;
     }
-}
+});
 
 //edit task
 const inputUpdate = modalUpdate.querySelector(".modal-input");
@@ -225,6 +226,7 @@ taskList.addEventListener("click", function (event) {
 
         modalHeading.innerText = "Edit Task";
         buttonAdd.innerText = "Edit";
+        addInput.placeholder = "Task name";
         checkValidateInput();
 
         buttonAdd.onclick = () => {
@@ -244,6 +246,7 @@ taskList.addEventListener("click", function (event) {
 
                 modalHeading.innerText = "Add Task";
                 buttonAdd.innerText = "Add";
+                addInput.placeholder = "Type your task here...";
 
                 addInput.value = '';
                 selectedPriority = 'low';
@@ -252,8 +255,41 @@ taskList.addEventListener("click", function (event) {
     }
 });
 
+//change status button
 
+const statusOptions = ["To Do", "In Progress", "Done"];
 
+taskList.addEventListener("click", function (event) {
+    const target = event.target;
+
+    if (target.classList.contains("task-status-btn")) {
+        const li = target.closest("li");
+        const statusIcon = li.querySelector(".task-status-icon");
+        const statusButton = li.querySelector(".task-status-btn");
+        const taskId = li.getAttribute("id");
+
+        const currentStatus = statusButton.innerText;
+        const newIndex = (statusOptions.indexOf(currentStatus) + 1) % statusOptions.length;
+       
+        const newStatus = statusOptions[newIndex];
+        statusButton.innerText = newStatus;
+
+        // Thay đổi icon tương ứng
+        if (newStatus === "To Do") {
+            statusIcon.src = "./assets/images/status-todo.svg";
+        } else if (newStatus === "In Progress") {
+            statusIcon.src = "./assets/images/status-inprogress.svg";
+        } else if (newStatus === "Done") {
+            statusIcon.src = "./assets/images/status-done.svg";
+        }
+
+        const taskChangeStatus = listTask[taskId.split('-')[1] - 1];
+        if (taskChangeStatus.status) {
+            taskChangeStatus.status = newStatus;
+            localStorage.setItem("arrayTaskList", JSON.stringify(listTask));
+        }
+    }
+})
 
 
 
