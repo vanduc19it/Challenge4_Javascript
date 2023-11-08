@@ -1,0 +1,105 @@
+/* Mobile */
+@media screen and (max-width: 739px) {
+    html {
+        background-color: $white-color;
+    }
+
+    .wrapper {
+        margin: 0 auto;
+        max-width: 739px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 0 15px;
+        position: absolute;
+    }
+
+    .task {
+
+        &-header {
+            gap: 52px;
+            width: 100%;
+        }
+
+        &-body,
+        &-list {
+            width: 100%;
+        }
+
+        &-item {
+            width: 370px;
+            display: block;
+        }
+
+        &-content-desc {
+            margin-bottom: 0px;
+        }
+
+        &-status-todo,
+        &-status-inprogress,
+        &-status-done {
+            position: unset;
+            margin-left: 0px;
+        }
+
+        &-priority {
+            display: block;
+            width: 100%;
+            position: unset;
+        }
+
+        &-priority-heading {
+            width: 47px;
+            margin-top: 13px;
+        }
+
+        &-icon-group {
+            display: block;
+            height: 82px;
+            margin-bottom: 25px;
+        }
+
+        &-status-btn {
+            margin-top: 18px;
+        }
+
+        &-status-icon {
+            margin: 15px 0;
+        }
+    }
+
+    .modal {
+
+        &-add {
+            width: 370px;
+            height: 391px;
+            padding: 30px;
+        }
+
+        &-delete {
+            width: 370px;
+        }
+
+        &-header {
+            gap: 190px;
+            width: 100%;
+        }
+
+        &-input {
+            width: 310px;
+        }
+
+        &-title-1 {
+            margin-left: 0;
+        }
+
+        &-priority {
+            margin-left: 0;
+        }
+    }
+}

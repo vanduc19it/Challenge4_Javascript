@@ -116,7 +116,7 @@ a {
     }
 
     &-list {
-        margin-top: 40px;
+        margin: 40px 0 50px 0;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -128,7 +128,7 @@ a {
         align-items: center;
         padding: 0 30px;
         width: 690px;
-        height: 84px;
+        min-height: 84px;
         border-radius: 24px;
         background-color: $white-color;
         box-shadow: 0px 6px 58px 0px rgba(196, 203, 214, 0.11);
@@ -140,6 +140,7 @@ a {
         font-weight: 400;
         line-height: 14px;
         width: 32px;
+        margin-top: 19px;
     }
 
     &-content-desc {
@@ -148,6 +149,8 @@ a {
         font-weight: 400;
         line-height: 19.2px;
         margin-top: 8px;
+        max-width: 166px;
+        margin-bottom: 23px;
     }
 
     &-priority {
@@ -160,6 +163,7 @@ a {
         font-size: 13px;
         font-weight: 400;
         line-height: 14px;
+        margin-top: -5px;
     }
 
     &-priority-desc {
@@ -168,11 +172,6 @@ a {
         line-height: 14px;
         text-transform: capitalize;
         margin-top: 7px;
-    }
-
-    &-status {
-        position: absolute;
-        left: 380px;
     }
 
     &-status-btn {
@@ -188,27 +187,52 @@ a {
         cursor: pointer;
     }
 
-    &-icon-group {
+    &-status-todo {
+        position: absolute;
+        margin-left: 380px;
+        left: 0;
+    }
 
+    &-status-inprogress {
+        position: absolute;
+        margin-left: 371px;
+        left: 0;
+    }
+
+    &-status-done {
+        position: absolute;
+        margin-left: 382px;
+        left: 0;
+    }
+
+    &-icon-group {
         margin-left: auto;
         display: flex;
         align-items: center;
     }
 
+    &-icon-action {
+        display: flex;
+    }
+
     &-status-icon {
         margin-right: 57px;
+        width: 24px;
+        height: 24px;
     }
 
     &-edit-icon {
         margin-right: 20px;
         cursor: pointer;
+        width: 22px;
+        height: 22px;
     }
 
     &-delete-icon {
         cursor: pointer;
+        width: 20px;
+        height: 22px;
     }
-
-
 }
 
 p.task-priority-desc.task-priority-high {
@@ -223,18 +247,17 @@ p.task-priority-desc.task-priority-low {
     color: $green-color;
 }
 
-.modal-add,
-.modal-update {
+.modal-add {
     width: 560px;
     height: 401px;
     border-radius: 24px;
     background-color: $white-color;
     padding: 40px 60px;
     display: none;
-    position: absolute;
-    top: 208px;
-    left: 358px;
-    bottom: 192px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
 }
 
@@ -361,8 +384,7 @@ p.task-priority-desc.task-priority-low {
         color: $white-color;
     }
 
-    &-btn-add,
-    &-btn-edit {
+    &-btn-add {
         @include action-button;
         display: flex;
         align-items: center;

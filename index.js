@@ -2,9 +2,7 @@ const grayColor = "#7D8592";
 const blueColor = "#713FFF";
 const iconAdd = document.querySelector(".task-btn-add");
 const buttonAdd = document.querySelector(".modal-btn-add");
-const buttonEdit = document.querySelector(".modal-btn-edit");
 const modalAdd = document.querySelector(".modal-add");
-const modalUpdate = document.querySelector('.modal-update');
 const modalDelete = document.querySelector(".modal-delete");
 const overlay = document.querySelector(".overlay");
 const buttonClose = document.querySelector('.modal-close-icon');
@@ -36,13 +34,13 @@ const showTaskList = () => {
                 <p class="task-priority-heading">Priority</p>
                 <p class="task-priority-desc task-priority-${task.priority}">${task.priority}</p>
             </div>
-            <div class="task-status">
-                <button class="task-status-btn">${task.status}</button>
-            </div>
+            <button class="task-status-btn task-status-${task.status.replace(' ', '').toLowerCase()}">${task.status}</button>
             <div class="task-icon-group">
                 <img src="./assets/images/status-${task.status.replace(' ', '').toLowerCase()}.svg" alt="status icon" class="task-status-icon">
-                <img src="./assets/images/edit-icon.svg" alt="edit icon" class="task-edit-icon">
-                <img src="./assets/images/delete-icon.svg" alt="delete icon" class="task-delete-icon">
+                <div class="task-icon-action">
+                    <img src="./assets/images/edit-icon.svg" alt="edit icon" class="task-edit-icon">
+                    <img src="./assets/images/delete-icon.svg" alt="delete icon" class="task-delete-icon">
+                </div>
             </div>
         `;
 
@@ -106,11 +104,6 @@ iconAdd.addEventListener("click", function () {
     checkValidateInput();
 })
 
-buttonEdit.addEventListener("click", function () {
-    modalUpdate.style.display = "none";
-    overlay.style.display = "none";
-})
-
 let taskId = +localStorage.getItem("taskId") || 1;
 
 buttonAdd.addEventListener("click", function () {
@@ -143,13 +136,13 @@ buttonAdd.addEventListener("click", function () {
                 <p class="task-priority-heading">Priority</p>
                 <p class="task-priority-desc task-priority-${selectedPriority}">${selectedPriority}</p>
             </div>
-            <div class="task-status">
-                <button class="task-status-btn">To Do</button>
-            </div>
+            <button class="task-status-btn task-status-todo">To Do</button>
             <div class="task-icon-group">
                 <img src="./assets/images/status-todo.svg" alt="status icon" class="task-status-icon">
-                <img src="./assets/images/edit-icon.svg" alt="edit icon" class="task-edit-icon">
-                <img src="./assets/images/delete-icon.svg" alt="delete icon" class="task-delete-icon">
+                <div class="task-icon-action">
+                    <img src="./assets/images/edit-icon.svg" alt="edit icon" class="task-edit-icon">
+                    <img src="./assets/images/delete-icon.svg" alt="delete icon" class="task-delete-icon">
+                </div>
             </div>
         `;
 
@@ -174,7 +167,7 @@ buttonClose.addEventListener("click", function () {
 })
 
 //disable button add khi input trống
-addInput.addEventListener("input", function() {
+addInput.addEventListener("input", function () {
     let inputValue = addInput.value;
 
     if (inputValue.trim() !== "") {
@@ -191,7 +184,7 @@ addInput.addEventListener("input", function() {
 });
 
 //edit task
-const inputUpdate = modalUpdate.querySelector(".modal-input");
+const inputUpdate = modalAdd.querySelector(".modal-input");
 taskList.addEventListener("click", function (event) {
     const target = event.target;
 
@@ -251,15 +244,18 @@ taskList.addEventListener("click", function (event) {
         const li = target.closest("li");
         const statusIcon = li.querySelector(".task-status-icon");
         const statusButton = li.querySelector(".task-status-btn");
+        const classNamesArray = Array.from(statusButton.classList);
         const taskId = li.getAttribute("id");
 
         const currentStatus = statusButton.innerText;
         const newIndex = (statusOptions.indexOf(currentStatus) + 1) % statusOptions.length;
-       
+
         const newStatus = statusOptions[newIndex];
         statusButton.innerText = newStatus;
 
-        // Thay đổi icon tương ứng
+        statusButton.classList.remove(classNamesArray[1]);
+        statusButton.classList.add(`task-status-${statusOptions[newIndex].replace(' ', '').toLowerCase()}`)
+
         if (newStatus === "To Do") {
             statusIcon.src = "./assets/images/status-todo.svg";
         } else if (newStatus === "In Progress") {
@@ -280,16 +276,16 @@ taskList.addEventListener("click", function (event) {
 taskList.onclick = (event) => {
     const target = event.target;
 
-    if(target.classList.contains("task-delete-icon")) {
+    if (target.classList.contains("task-delete-icon")) {
         const liDelete = target.closest("li");
         const taskId = liDelete.getAttribute("id").split('-')[1];
 
         modalDelete.style.display = "flex";
         overlay.style.display = "block";
         buttonDelete.onclick = () => {
-            
+
             liDelete.remove();
-            listTask = listTask.filter(task => task.taskId !== parseInt(taskId)); 
+            listTask = listTask.filter(task => task.taskId !== parseInt(taskId));
             localStorage.setItem("arrayTaskList", JSON.stringify(listTask));
             modalDelete.style.display = "none";
             overlay.style.display = "none";
