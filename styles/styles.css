@@ -20,17 +20,11 @@ a {
   text-decoration: none;
 }
 
-.wrapper {
-  margin: 0 auto;
-  max-width: 1366px;
-  position: relative;
-}
-
 .container {
   max-width: 1366px;
   margin: 0 auto;
   padding: 0 338px;
-  position: absolute;
+  position: relative;
 }
 
 .task-header {
@@ -183,7 +177,7 @@ a {
   gap: 20px;
 }
 .task-status-icon {
-  margin-right: 57px;
+  margin-right: 58px;
   width: 22px;
   height: 22px;
 }
@@ -444,18 +438,11 @@ a {
   html {
     background-color: #fff;
   }
-  .wrapper {
-    margin: 0 auto;
-    max-width: 739px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
   .container {
     max-width: 400px;
     margin: 0 auto;
     padding: 0 15px;
-    position: absolute;
+    position: relative;
   }
   .task-header {
     gap: 52px;

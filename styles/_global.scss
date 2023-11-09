@@ -21,17 +21,11 @@ a {
   text-decoration: none;
 }
 
-.wrapper {
-  margin: 0 auto;
-  max-width: 1366px;
-  position: relative;
-}
-
 .container {
   max-width: 1366px;
   margin: 0 auto;
   padding: 0 338px;
-  position: absolute;
+  position: relative;
 }
 
 @mixin priority-button {
@@ -236,7 +230,7 @@ a {
   }
 
   &-status-icon {
-    margin-right: 57px;
+    margin-right: 58px;
     width: 22px;
     height: 22px;
   }

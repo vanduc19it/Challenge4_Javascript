@@ -4,19 +4,11 @@
     background-color: $white-color;
   }
 
-  .wrapper {
-    margin: 0 auto;
-    max-width: 739px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-  }
-
   .container {
     max-width: 400px;
     margin: 0 auto;
     padding: 0 15px;
-    position: absolute;
+    position: relative;
   }
 
   .task {
