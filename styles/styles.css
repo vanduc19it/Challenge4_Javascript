@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +8,7 @@
 html {
   scroll-behavior: smooth;
   font-family: "Poppins", sans-serif;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
 }
 
 button,
@@ -43,16 +42,14 @@ a {
   height: 44px;
   margin-top: 50px;
 }
-
 .task-title {
   width: 161px;
   height: 36px;
-  color: #0A1629;
+  color: #0a1629;
   font-size: 36px;
   font-weight: 600;
   line-height: 36px;
 }
-
 .task-btn-add {
   display: flex;
   justify-content: space-between;
@@ -63,35 +60,30 @@ a {
   font-family: Arial;
   border-radius: 14px;
   box-shadow: 0px 6px 12px 0px rgba(113, 63, 255, 0.25);
-  background-color: #713FFF;
+  background-color: #713fff;
   cursor: pointer;
 }
-
 .task-add-icon {
   width: 14px;
   height: 14px;
 }
-
 .task-add-text {
-  color: #FFF;
+  color: #fff;
   text-align: center;
   font-family: Arial;
   font-size: 16px;
   font-weight: 700;
 }
-
 .task-body {
   width: 690px;
   display: block;
 }
-
 .task-list {
   margin: 40px 0 50px 0;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 .task-item {
   display: flex;
   position: relative;
@@ -100,21 +92,19 @@ a {
   width: 690px;
   min-height: 84px;
   border-radius: 24px;
-  background-color: #FFF;
+  background-color: #fff;
   box-shadow: 0px 6px 58px 0px rgba(196, 203, 214, 0.11);
 }
-
 .task-content-heading {
-  color: #91929E;
+  color: #91929e;
   font-size: 14px;
   font-weight: 400;
   line-height: 14px;
   width: 32px;
   margin-top: 19px;
 }
-
 .task-content-desc {
-  color: #0A1629;
+  color: #0a1629;
   font-size: 15px;
   font-weight: 400;
   line-height: 19.2px;
@@ -122,20 +112,21 @@ a {
   max-width: 166px;
   margin-bottom: 23px;
 }
-
 .task-priority {
   position: absolute;
   left: 257px;
+  margin-top: -5px;
 }
-
+.task-medium {
+  left: 253px;
+}
 .task-priority-heading {
-  color: #91929E;
+  color: #91929e;
   font-size: 13px;
   font-weight: 400;
   line-height: 14px;
-  margin-top: -5px;
+  width: 47px;
 }
-
 .task-priority-desc {
   font-size: 14px;
   font-weight: 500;
@@ -143,12 +134,20 @@ a {
   text-transform: capitalize;
   margin-top: 7px;
 }
-
+.task-priority-high {
+  color: #f73446;
+}
+.task-priority-medium {
+  color: #ffbd21;
+}
+.task-priority-low {
+  color: #0ac947;
+}
 .task-status-btn {
   border-radius: 8px;
   background: rgba(124, 133, 146, 0.14);
   padding: 7px 14px;
-  color: #7D8592;
+  color: #7d8592;
   text-align: center;
   font-family: Arial;
   font-size: 12px;
@@ -156,71 +155,54 @@ a {
   border: none;
   cursor: pointer;
 }
-
 .task-status-todo {
   position: absolute;
   margin-left: 380px;
   left: 0;
+  width: 61px;
 }
-
 .task-status-inprogress {
   position: absolute;
   margin-left: 371px;
   left: 0;
+  width: 94px;
 }
-
 .task-status-done {
   position: absolute;
   margin-left: 382px;
   left: 0;
+  width: 58px;
 }
-
 .task-icon-group {
   margin-left: auto;
   display: flex;
   align-items: center;
 }
-
 .task-icon-action {
   display: flex;
+  gap: 20px;
 }
-
 .task-status-icon {
   margin-right: 57px;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
-
 .task-edit-icon {
-  margin-right: 20px;
   cursor: pointer;
   width: 22px;
   height: 22px;
 }
-
 .task-delete-icon {
   cursor: pointer;
   width: 20px;
   height: 22px;
 }
 
-p.task-priority-desc.task-priority-high {
-  color: #F73446;
-}
-
-p.task-priority-desc.task-priority-medium {
-  color: #FFBD21;
-}
-
-p.task-priority-desc.task-priority-low {
-  color: #0AC947;
-}
-
-.modal-add {
+.modal-add-edit {
   width: 560px;
   height: 401px;
   border-radius: 24px;
-  background-color: #FFF;
+  background-color: #fff;
   padding: 40px 60px;
   display: none;
   position: fixed;
@@ -229,12 +211,11 @@ p.task-priority-desc.task-priority-low {
   transform: translate(-50%, -50%);
   z-index: 1000;
 }
-
 .modal-delete {
   width: 560px;
   height: 222px;
   border-radius: 24px;
-  background-color: #FFF;
+  background-color: #fff;
   padding: 40px 130px;
   z-index: 1000;
   position: fixed;
@@ -245,7 +226,6 @@ p.task-priority-desc.task-priority-low {
   align-items: center;
   display: none;
 }
-
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -255,74 +235,64 @@ p.task-priority-desc.task-priority-low {
   height: 36px;
   margin-bottom: 31px;
 }
-
 .modal-heading {
-  color: #0A1629;
+  color: #0a1629;
   font-size: 22px;
   font-weight: 600;
   line-height: 36px;
   width: 105px;
 }
-
 .modal-close-icon {
   width: 15px;
   height: 15px;
   cursor: pointer;
 }
-
 .modal-title {
-  color: #7D8592;
+  color: #7d8592;
   font-size: 14px;
   font-weight: 600;
   line-height: 22px;
-  width: 34px;
+  width: 54px;
 }
-
 .modal-title-1 {
   margin-left: -1px;
+  width: 34px;
 }
-
 .modal-input {
   width: 440px;
   height: 50px;
   border-radius: 14px;
-  border: 1px solid #D8E0F0;
+  border: 1px solid #d8e0f0;
   padding: 14px 18px;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
   margin-top: 10px;
   margin-bottom: 20px;
-  color: #91929E;
+  color: #91929e;
 }
-
 .modal-input::-moz-placeholder {
-  color: #91929E;
+  color: #91929e;
 }
-
 .modal-input::placeholder {
-  color: #91929E;
+  color: #91929e;
 }
-
 .modal-input:focus {
-  color: #91929E;
+  color: #91929e;
   outline: none;
 }
-
 .modal-close-icon {
   width: 15px;
   height: 15px;
 }
-
 .modal-priority {
   display: flex;
   gap: 12px;
   margin: 10px 0px 50px 2px;
 }
-
 .modal-btn-high {
   border-radius: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
   padding: 7px 0px;
   width: 90px;
@@ -334,13 +304,12 @@ p.task-priority-desc.task-priority-low {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #F73446;
-  color: #F73446;
+  border: 1px solid #f73446;
+  color: #f73446;
 }
-
 .modal-btn-medium {
   border-radius: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
   padding: 7px 0px;
   width: 90px;
@@ -352,13 +321,12 @@ p.task-priority-desc.task-priority-low {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #FFBD21;
-  color: #FFBD21;
+  border: 1px solid #ffbd21;
+  color: #ffbd21;
 }
-
 .modal-btn-low {
   border-radius: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   cursor: pointer;
   padding: 7px 0px;
   width: 90px;
@@ -370,28 +338,24 @@ p.task-priority-desc.task-priority-low {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #0AC947;
-  color: #0AC947;
+  border: 1px solid #0ac947;
+  color: #0ac947;
 }
-
 .modal-high-active {
-  border: 1px solid #F73446;
-  background-color: #F73446;
-  color: #FFF;
+  border: 1px solid #f73446;
+  background-color: #f73446;
+  color: #fff;
 }
-
 .modal-medium-active {
-  border: 1px solid #FFBD21;
-  background-color: #FFBD21;
-  color: #FFF;
+  border: 1px solid #ffbd21;
+  background-color: #ffbd21;
+  color: #fff;
 }
-
 .modal-low-active {
-  border: 1px solid #0AC947;
-  background-color: #0AC947;
-  color: #FFF;
+  border: 1px solid #0ac947;
+  background-color: #0ac947;
+  color: #fff;
 }
-
 .modal-btn-add {
   border-radius: 10px;
   cursor: pointer;
@@ -403,31 +367,38 @@ p.task-priority-desc.task-priority-low {
   display: flex;
   align-items: center;
   margin-left: auto;
-  border: 1px solid #7D8592;
-  background-color: #7D8592;
-  color: #FFF;
+  border: 1px solid #7d8592;
+  background-color: #7d8592;
+  color: #fff;
   width: 94px;
   font-weight: 600;
   font-size: 16px;
 }
-
+.modal-input-disabled {
+  cursor: default;
+  border: 1px solid #7d8592;
+  background-color: #7d8592;
+}
+.modal-input-enabled {
+  cursor: pointer;
+  border: 1px solid #713fff;
+  background-color: #713fff;
+}
 .modal-info {
   width: 300px;
-  color: #0A1629;
+  color: #0a1629;
   text-align: center;
   font-size: 22px;
   font-weight: 600;
   line-height: 36px;
   margin-bottom: 30px;
 }
-
 .modal-btn-group {
   display: flex;
   gap: 25px;
   width: 257px;
   height: 40px;
 }
-
 .modal-delete-btn {
   border-radius: 10px;
   cursor: pointer;
@@ -436,13 +407,12 @@ p.task-priority-desc.task-priority-low {
   height: 40px;
   font-size: 16px;
   line-height: 16px;
-  border: 1px solid #713FFF;
-  background: #713FFF;
+  border: 1px solid #713fff;
+  background: #713fff;
   width: 114px;
-  color: #FFF;
+  color: #fff;
   font-weight: 600;
 }
-
 .modal-cancel-btn {
   border-radius: 10px;
   cursor: pointer;
@@ -452,10 +422,10 @@ p.task-priority-desc.task-priority-low {
   font-size: 16px;
   line-height: 16px;
   width: 118px;
-  border: 1px solid #D8E0F0;
-  color: #7D8592;
+  border: 1px solid #d8e0f0;
+  color: #7d8592;
   font-weight: 500;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 .overlay {
@@ -472,9 +442,8 @@ p.task-priority-desc.task-priority-low {
 /* Mobile */
 @media screen and (max-width: 739px) {
   html {
-    background-color: #FFF;
+    background-color: #fff;
   }
-
   .wrapper {
     margin: 0 auto;
     max-width: 739px;
@@ -482,88 +451,71 @@ p.task-priority-desc.task-priority-low {
     display: flex;
     justify-content: center;
   }
-
   .container {
     max-width: 400px;
     margin: 0 auto;
     padding: 0 15px;
     position: absolute;
   }
-
   .task-header {
     gap: 52px;
     width: 100%;
   }
-
   .task-body,
   .task-list {
     width: 100%;
   }
-
   .task-item {
     width: 370px;
     display: block;
   }
-
   .task-content-desc {
     margin-bottom: 0px;
   }
-
   .task-status-todo,
   .task-status-inprogress,
   .task-status-done {
     position: unset;
     margin-left: 0px;
   }
-
   .task-priority {
     display: block;
     width: 100%;
     position: unset;
   }
-
   .task-priority-heading {
     width: 47px;
     margin-top: 13px;
   }
-
   .task-icon-group {
     display: block;
     height: 82px;
     margin-bottom: 25px;
   }
-
   .task-status-btn {
     margin-top: 18px;
   }
-
   .task-status-icon {
     margin: 15px 0;
   }
-
-  .modal-add {
+  .modal-add-edit {
     width: 370px;
     height: 391px;
     padding: 30px;
+    top: 328px;
+    transform: translate(-50%, 0%);
   }
-
   .modal-delete {
     width: 370px;
   }
-
   .modal-header {
     gap: 190px;
     width: 100%;
   }
-
   .modal-input {
     width: 310px;
   }
-
-  .modal-title-1 {
-    margin-left: 0;
-  }
-
+  .modal-title-1,
   .modal-priority {
     margin-left: 0;
   }
