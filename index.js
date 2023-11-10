@@ -83,7 +83,7 @@ const updateSelected = () => {
 };
 
 const checkValidateInput = () => {
-  if (addInput.value == "") {
+  if (addInput.value == "" || addInput.value.length > 200) {
     buttonAddEdit.disabled = true;
     buttonAddEdit.classList.add("modal-input-disabled");
     buttonAddEdit.classList.remove("modal-input-enabled");
@@ -157,7 +157,7 @@ buttonClose.addEventListener("click", function () {
 //disable button add, edit khi input trống
 addInput.addEventListener("input", function () {
   let inputValue = addInput.value;
-  if (inputValue.trim() !== "") {
+  if (inputValue.trim() !== "" && inputValue.length <= 200) {
     buttonAddEdit.disabled = false;
     buttonAddEdit.classList.add("modal-input-enabled");
     buttonAddEdit.classList.remove("modal-input-disabled");
