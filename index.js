@@ -26,7 +26,7 @@ const showTaskList = () => {
                 <p class="task-content-heading">Task</p>
                 <p class="task-content-desc">${task.taskName}</p>
             </div>
-            <div class="task-priority task-${task.priority}">
+            <div class="task-priority">
                 <p class="task-priority-heading task-mr-${task.status
                   .replace(" ", "")
                   .toLowerCase()}">Priority</p>
@@ -136,7 +136,7 @@ buttonAddEdit.addEventListener("click", function () {
                 <p class="task-content-heading">Task</p>
                 <p class="task-content-desc">${addInput.value}</p>
             </div>
-            <div class="task-priority task-${selectedPriority} ">
+            <div class="task-priority">
                 <p class="task-priority-heading task-mr-todo">Priority</p>
                 <p class="task-priority-desc task-priority-${selectedPriority}">${selectedPriority}</p>
             </div>
@@ -162,7 +162,6 @@ buttonClose.addEventListener("click", function () {
   selectedPriority = "";
   modalHeading.innerText = "Add Task";
   buttonAddEdit.innerText = "Add";
-  addInput.placeholder = "Type your task here...";
   modalAddEdit.style.display = "none";
   overlay.style.display = "none";
 });
@@ -172,13 +171,12 @@ overlay.onclick = () => {
   selectedPriority = "";
   modalHeading.innerText = "Add Task";
   buttonAddEdit.innerText = "Add";
-  addInput.placeholder = "Type your task here...";
   modalAddEdit.style.display = "none";
   modalDelete.style.display = "none";
   overlay.style.display = "none";
 };
 
-//disable button add, edit when input empty or space or length>200 or not select priority
+//disable button add, edit when input empty or space or length > 200 or not select priority
 function updateButtonState() {
   if (
     selectedPriority != "" &&
@@ -210,7 +208,6 @@ taskList.addEventListener("click", function (event) {
     overlay.style.display = "block";
     modalHeading.innerText = "Edit Task";
     buttonAddEdit.innerText = "Edit";
-    addInput.placeholder = "Task name";
     const taskItemEdit = listTask.find(
       (task) => task.taskId === parseInt(taskId.split("-")[1])
     );
@@ -222,13 +219,10 @@ taskList.addEventListener("click", function (event) {
     checkValidateInput();
     buttonAddEdit.onclick = () => {
       if (buttonAddEdit.innerText == "Edit") {
-        const priorityContainer = liEdit.querySelector(`.task-${priority}`);
         const taskContent = liEdit.querySelector(".task-content-desc");
         const taskPriority = liEdit.querySelector(".task-priority-desc");
         taskContent.innerText = addInput.value;
         taskPriority.innerText = selectedPriority;
-        priorityContainer.classList.remove(`task-${priority}`);
-        priorityContainer.classList.add(`task-${selectedPriority}`);
         taskPriority.classList.remove(`task-priority-${priority}`);
         taskPriority.classList.add(`task-priority-${selectedPriority}`);
         taskItemEdit.taskName = addInput.value;
@@ -238,7 +232,6 @@ taskList.addEventListener("click", function (event) {
         overlay.style.display = "none";
         modalHeading.innerText = "Add Task";
         buttonAddEdit.innerText = "Add";
-        addInput.placeholder = "Type your task here...";
         addInput.value = "";
         selectedPriority = "";
       }
