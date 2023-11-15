@@ -34,7 +34,7 @@ a {
   gap: 372px;
   width: 690px;
   height: 44px;
-  margin-top: 50px;
+  margin: 50px 0 40px 0;
 }
 .task-title {
   width: 161px;
@@ -73,7 +73,7 @@ a {
   display: block;
 }
 .task-list {
-  margin: 40px 0 50px 0;
+  margin: 0 0 50px 0;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -89,13 +89,16 @@ a {
   background-color: #fff;
   box-shadow: 0px 6px 58px 0px rgba(196, 203, 214, 0.11);
 }
+.task-content {
+  margin: 19px 0 23px 0;
+}
 .task-content-heading {
   color: #91929e;
   font-size: 14px;
   font-weight: 400;
   line-height: 14px;
   width: 32px;
-  margin-top: 19px;
+  margin: 0 195px 0 0;
 }
 .task-content-desc {
   color: #0a1629;
@@ -104,15 +107,19 @@ a {
   line-height: 19.2px;
   margin-top: 8px;
   max-width: 166px;
-  margin-bottom: 23px;
+  overflow-wrap: break-word;
 }
 .task-priority {
-  position: absolute;
-  left: 257px;
-  margin-top: -5px;
+  padding: 22px 0 27px 0;
 }
-.task-medium {
-  left: 253px;
+.task-mr-todo {
+  margin-right: 76px;
+}
+.task-mr-inprogress {
+  margin-right: 71px;
+}
+.task-mr-done {
+  margin-right: 78px;
 }
 .task-priority-heading {
   color: #91929e;
@@ -148,24 +155,17 @@ a {
   font-weight: 400;
   border: none;
   cursor: pointer;
+  margin-top: 28px;
+  margin-bottom: 28px;
 }
 .task-status-todo {
-  position: absolute;
-  margin-left: 380px;
-  left: 0;
-  width: 61px;
+  margin-right: 76px;
 }
 .task-status-inprogress {
-  position: absolute;
-  margin-left: 371px;
-  left: 0;
-  width: 94px;
+  margin-right: 53px;
 }
 .task-status-done {
-  position: absolute;
-  margin-left: 382px;
-  left: 0;
-  width: 58px;
+  margin-right: 77px;
 }
 .task-icon-group {
   margin-left: auto;
@@ -175,9 +175,10 @@ a {
 .task-icon-action {
   display: flex;
   gap: 20px;
+  height: 100%;
 }
 .task-status-icon {
-  margin-right: 58px;
+  margin: 30px 58px 30px 0;
   width: 22px;
   height: 22px;
 }
@@ -185,11 +186,13 @@ a {
   cursor: pointer;
   width: 22px;
   height: 22px;
+  margin: 31px 0;
 }
 .task-delete-icon {
   cursor: pointer;
   width: 20px;
   height: 22px;
+  margin: 31px 0;
 }
 
 .modal-add-edit {
@@ -222,9 +225,8 @@ a {
 }
 .modal-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 320px;
+  align-items: center;
   width: 440px;
   height: 36px;
   margin-bottom: 31px;
@@ -288,52 +290,46 @@ a {
   border-radius: 10px;
   background-color: #fff;
   cursor: pointer;
-  padding: 7px 0px;
-  width: 90px;
   text-align: center;
   font-size: 14px;
   font-weight: 400;
-  height: 30px;
   line-height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #f73446;
   color: #f73446;
+  padding: 7px 28.5px;
 }
 .modal-btn-medium {
   border-radius: 10px;
   background-color: #fff;
   cursor: pointer;
-  padding: 7px 0px;
-  width: 90px;
   text-align: center;
   font-size: 14px;
   font-weight: 400;
-  height: 30px;
   line-height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #ffbd21;
   color: #ffbd21;
+  padding: 7px 15.8px;
 }
 .modal-btn-low {
   border-radius: 10px;
   background-color: #fff;
   cursor: pointer;
-  padding: 7px 0px;
-  width: 90px;
   text-align: center;
   font-size: 14px;
   font-weight: 400;
-  height: 30px;
   line-height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #0ac947;
   color: #0ac947;
+  padding: 7px 31px;
 }
 .modal-high-active {
   border: 1px solid #f73446;
@@ -355,7 +351,6 @@ a {
   cursor: pointer;
   padding: 12px 30px;
   text-align: center;
-  height: 40px;
   font-size: 16px;
   line-height: 16px;
   display: flex;
@@ -364,7 +359,6 @@ a {
   border: 1px solid #7d8592;
   background-color: #7d8592;
   color: #fff;
-  width: 94px;
   font-weight: 600;
   font-size: 16px;
 }
@@ -398,12 +392,10 @@ a {
   cursor: pointer;
   padding: 12px 30px;
   text-align: center;
-  height: 40px;
   font-size: 16px;
   line-height: 16px;
   border: 1px solid #713fff;
   background: #713fff;
-  width: 114px;
   color: #fff;
   font-weight: 600;
 }
@@ -412,10 +404,8 @@ a {
   cursor: pointer;
   padding: 12px 30px;
   text-align: center;
-  height: 40px;
   font-size: 16px;
   line-height: 16px;
-  width: 118px;
   border: 1px solid #d8e0f0;
   color: #7d8592;
   font-weight: 500;
@@ -431,6 +421,7 @@ a {
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 999;
+  cursor: pointer;
 }
 
 /* Mobile */
@@ -456,8 +447,11 @@ a {
     width: 370px;
     display: block;
   }
-  .task-content-desc {
-    margin-bottom: 0px;
+  .task-content {
+    margin-bottom: 13px;
+  }
+  .task-content-heading {
+    margin-right: 0px;
   }
   .task-status-todo,
   .task-status-inprogress,
@@ -469,21 +463,33 @@ a {
     display: block;
     width: 100%;
     position: unset;
+    padding: 0;
   }
   .task-priority-heading {
     width: 47px;
-    margin-top: 13px;
+    margin-right: 0px;
+  }
+  .task-priority-desc {
+    font-weight: 400;
   }
   .task-icon-group {
     display: block;
-    height: 82px;
+    height: 62px;
     margin-bottom: 25px;
   }
+  .task-icon-action {
+    height: unset;
+  }
   .task-status-btn {
-    margin-top: 18px;
+    margin: 18px 0 0 0;
   }
   .task-status-icon {
     margin: 15px 0;
+    display: block;
+  }
+  .task-edit-icon,
+  .task-delete-icon {
+    margin: 0;
   }
   .modal-add-edit {
     width: 370px;
@@ -498,12 +504,19 @@ a {
   .modal-header {
     gap: 190px;
     width: 100%;
+    margin-bottom: 41px;
   }
   .modal-input {
     width: 310px;
+    padding: 14px 12.68px;
   }
   .modal-title-1,
   .modal-priority {
     margin-left: 0;
+  }
+}
+@media screen and (max-width: 399px) {
+  .task-header {
+    gap: 40px;
   }
 }

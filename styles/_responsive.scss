@@ -25,10 +25,15 @@
     &-item {
       width: 370px;
       display: block;
+      // min-height: 256px;
     }
 
-    &-content-desc {
-      margin-bottom: 0px;
+    &-content {
+      margin-bottom: 13px;
+    }
+
+    &-content-heading {
+      margin-right: 0px;
     }
 
     &-status-todo,
@@ -42,25 +47,40 @@
       display: block;
       width: 100%;
       position: unset;
+      padding: 0;
     }
 
     &-priority-heading {
       width: 47px;
-      margin-top: 13px;
+      margin-right: 0px;
+    }
+
+    &-priority-desc {
+      font-weight: 400;
     }
 
     &-icon-group {
       display: block;
-      height: 82px;
+      height: 62px;
       margin-bottom: 25px;
     }
 
+    &-icon-action {
+      height: unset;
+    }
+
     &-status-btn {
-      margin-top: 18px;
+      margin: 18px 0 0 0;
     }
 
     &-status-icon {
       margin: 15px 0;
+      display: block;
+    }
+
+    &-edit-icon,
+    &-delete-icon {
+      margin: 0;
     }
   }
 
@@ -80,15 +100,25 @@
     &-header {
       gap: 190px;
       width: 100%;
+      margin-bottom: 41px;
     }
 
     &-input {
       width: 310px;
+      padding: 14px 12.68px;
     }
 
     &-title-1,
     &-priority {
       margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .task {
+    &-header {
+      gap: 40px;
     }
   }
 }

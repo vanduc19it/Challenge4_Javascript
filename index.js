@@ -27,7 +27,9 @@ const showTaskList = () => {
                 <p class="task-content-desc">${task.taskName}</p>
             </div>
             <div class="task-priority task-${task.priority}">
-                <p class="task-priority-heading">Priority</p>
+                <p class="task-priority-heading task-mr-${task.status
+                  .replace(" ", "")
+                  .toLowerCase()}">Priority</p>
                 <p class="task-priority-desc task-priority-${task.priority}">${
       task.priority
     }</p>
@@ -49,21 +51,24 @@ const showTaskList = () => {
   });
 };
 showTaskList();
-let selectedPriority = "low";
+let selectedPriority = "";
 
 highPriorityBtn.onclick = () => {
   selectedPriority = "high";
   updateSelected();
+  updateButtonState();
 };
 
 mediumPriorityBtn.onclick = () => {
   selectedPriority = "medium";
   updateSelected();
+  updateButtonState();
 };
 
 lowPriorityBtn.onclick = () => {
   selectedPriority = "low";
   updateSelected();
+  updateButtonState();
 };
 
 const updateSelected = () => {
@@ -75,15 +80,23 @@ const updateSelected = () => {
     mediumPriorityBtn.classList.add("modal-medium-active");
     highPriorityBtn.classList.remove("modal-high-active");
     lowPriorityBtn.classList.remove("modal-low-active");
-  } else {
+  } else if (selectedPriority === "low") {
     lowPriorityBtn.classList.add("modal-low-active");
+    mediumPriorityBtn.classList.remove("modal-medium-active");
+    highPriorityBtn.classList.remove("modal-high-active");
+  } else {
+    lowPriorityBtn.classList.remove("modal-low-active");
     mediumPriorityBtn.classList.remove("modal-medium-active");
     highPriorityBtn.classList.remove("modal-high-active");
   }
 };
 
 const checkValidateInput = () => {
-  if (addInput.value == "" || addInput.value.length > 200) {
+  if (
+    addInput.value == "" ||
+    addInput.value.length > 200 ||
+    selectedPriority == ""
+  ) {
     buttonAddEdit.disabled = true;
     buttonAddEdit.classList.add("modal-input-disabled");
     buttonAddEdit.classList.remove("modal-input-enabled");
@@ -123,8 +136,8 @@ buttonAddEdit.addEventListener("click", function () {
                 <p class="task-content-heading">Task</p>
                 <p class="task-content-desc">${addInput.value}</p>
             </div>
-            <div class="task-priority task-${selectedPriority}">
-                <p class="task-priority-heading">Priority</p>
+            <div class="task-priority task-${selectedPriority} ">
+                <p class="task-priority-heading task-mr-todo">Priority</p>
                 <p class="task-priority-desc task-priority-${selectedPriority}">${selectedPriority}</p>
             </div>
             <button class="task-status-btn task-status-todo">To Do</button>
@@ -138,7 +151,7 @@ buttonAddEdit.addEventListener("click", function () {
         `;
     taskList.insertBefore(li, taskList.firstChild);
     addInput.value = "";
-    selectedPriority = "low";
+    selectedPriority = "";
     modalAddEdit.style.display = "none";
     overlay.style.display = "none";
   }
@@ -146,7 +159,7 @@ buttonAddEdit.addEventListener("click", function () {
 
 buttonClose.addEventListener("click", function () {
   addInput.value = "";
-  selectedPriority = "low";
+  selectedPriority = "";
   modalHeading.innerText = "Add Task";
   buttonAddEdit.innerText = "Add";
   addInput.placeholder = "Type your task here...";
@@ -154,10 +167,24 @@ buttonClose.addEventListener("click", function () {
   overlay.style.display = "none";
 });
 
-//disable button add, edit khi input trống
-addInput.addEventListener("input", function () {
-  let inputValue = addInput.value;
-  if (inputValue.trim() !== "" && inputValue.length <= 200) {
+overlay.onclick = () => {
+  addInput.value = "";
+  selectedPriority = "";
+  modalHeading.innerText = "Add Task";
+  buttonAddEdit.innerText = "Add";
+  addInput.placeholder = "Type your task here...";
+  modalAddEdit.style.display = "none";
+  modalDelete.style.display = "none";
+  overlay.style.display = "none";
+};
+
+//disable button add, edit when input empty or space or length>200 or not select priority
+function updateButtonState() {
+  if (
+    selectedPriority != "" &&
+    addInput.value.trim() !== "" &&
+    addInput.value.length <= 200
+  ) {
     buttonAddEdit.disabled = false;
     buttonAddEdit.classList.add("modal-input-enabled");
     buttonAddEdit.classList.remove("modal-input-disabled");
@@ -166,6 +193,10 @@ addInput.addEventListener("input", function () {
     buttonAddEdit.classList.add("modal-input-disabled");
     buttonAddEdit.classList.remove("modal-input-enabled");
   }
+}
+
+addInput.addEventListener("input", function () {
+  updateButtonState();
 });
 
 //edit task
@@ -191,10 +222,13 @@ taskList.addEventListener("click", function (event) {
     checkValidateInput();
     buttonAddEdit.onclick = () => {
       if (buttonAddEdit.innerText == "Edit") {
+        const priorityContainer = liEdit.querySelector(`.task-${priority}`);
         const taskContent = liEdit.querySelector(".task-content-desc");
         const taskPriority = liEdit.querySelector(".task-priority-desc");
         taskContent.innerText = addInput.value;
         taskPriority.innerText = selectedPriority;
+        priorityContainer.classList.remove(`task-${priority}`);
+        priorityContainer.classList.add(`task-${selectedPriority}`);
         taskPriority.classList.remove(`task-priority-${priority}`);
         taskPriority.classList.add(`task-priority-${selectedPriority}`);
         taskItemEdit.taskName = addInput.value;
@@ -206,7 +240,7 @@ taskList.addEventListener("click", function (event) {
         buttonAddEdit.innerText = "Add";
         addInput.placeholder = "Type your task here...";
         addInput.value = "";
-        selectedPriority = "low";
+        selectedPriority = "";
       }
     };
   }
@@ -220,6 +254,7 @@ taskList.addEventListener("click", function (event) {
     const li = target.closest("li");
     const statusIcon = li.querySelector(".task-status-icon");
     const statusButton = li.querySelector(".task-status-btn");
+    const priorityHeading = li.querySelector(".task-priority-heading");
     const classNamesArray = Array.from(statusButton.classList);
     const taskId = li.getAttribute("id");
     const currentStatus = statusButton.innerText;
@@ -231,6 +266,13 @@ taskList.addEventListener("click", function (event) {
     statusButton.classList.add(
       `task-status-${statusOptions[newIndex].replace(" ", "").toLowerCase()}`
     );
+    priorityHeading.classList.remove(
+      `task-mr-${currentStatus.replace(" ", "").toLowerCase()}`
+    );
+    priorityHeading.classList.add(
+      `task-mr-${newStatus.replace(" ", "").toLowerCase()}`
+    );
+
     if (newStatus === "To Do") {
       statusIcon.src = "./assets/images/status-todo.svg";
     } else if (newStatus === "In Progress") {
